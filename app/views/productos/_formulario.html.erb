@@ -1,0 +1,30 @@
+<h1>formulario productos</h1>
+
+<%= form_with(model: producto) do |f| %>
+
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+<br>
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+    <br>
+    <%= f.label :precio %>
+    <%= f.text_field :precio %>
+<br>    
+    <%= f.label :cantidad %>
+    <%= f.text_field :cantidad %>
+<br>
+    <%= f.label :categoria_id %>
+    <%= f.select :categoria_id ,
+        options_from_collection_for_select(categorias, :id, :categoria)%>
+<br>
+    <%= f.label :imagenes %>
+    <%= f.file_field :imagenes, multiple: true %>
+
+<br>
+<br>
+
+    <%= f.submit %>    
+    
+    
+<% end %>

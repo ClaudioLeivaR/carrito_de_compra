@@ -1,0 +1,8 @@
+<%= form_with(model: categoria) do |formulario| %>
+    <%= formulario.label :categoria %>
+    <%= formulario.text_field :categoria %>
+    <% if categoria.errors[:categoria].any?  %>
+        <%= categoria.errors[:categoria].first %>
+    <%end %>
+    <%= formulario.submit 'Enviar' %>
+<% end %>

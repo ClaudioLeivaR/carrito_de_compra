@@ -1,0 +1,22 @@
+<h1>Categorias</h1>
+
+<%= link_to 'Crear categoria', nueva_categoria_path %>
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Acciones</th>
+    </tr>
+    <% @categorias.each do |categoria| %>
+        <tr>
+            <td><%= categoria.categoria %></td>
+            <td>
+                <%= link_to editar_categoria_path(categoria) do %>
+                    <i class="bi bi-pencil-fill"></i> Editar
+                <% end %>
+                <%= link_to categoria_path(categoria), method: :delete, data: { confirm: '¿Quieres eliminar la categoria?' }  do %>
+                    <i class="bi bi-trash-fill"></i> Eliminar                    
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

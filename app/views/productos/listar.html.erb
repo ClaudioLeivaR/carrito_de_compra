@@ -1,0 +1,25 @@
+<h1>productos registrado</h1>
+<%= link_to 'Nuevo producto', nuevo_producto_path %>
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Categoria</th>
+    </tr>
+<% @productos.each do |producto| %>
+    <tr>
+        <td><%= producto.nombre %></td>
+        <td><%= producto.precio %></td>
+        <td><%= producto.cantidad %></td>
+        <td><%= producto.categoria.categoria %></td>
+        <td>
+            <% producto.imagenes.each do |img| %>
+                <%= image_tag img, width:100 %>
+            <% end %>
+        </td>
+
+
+    </tr>
+    <%end %>
+</table>
