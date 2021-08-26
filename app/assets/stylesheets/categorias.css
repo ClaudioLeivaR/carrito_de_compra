@@ -1,0 +1,27 @@
+.fila{
+    background-color: white;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #eeeeee;
+
+}
+
+.contenedor{
+    position: relative;
+    top: 5rem;
+}
+.titulo-seccion{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.boton-crear-derecha{
+    position: absolute;
+    right: 2rem;
+}
+
+.tabla-categorias{
+    margin-top: 2rem;
+}

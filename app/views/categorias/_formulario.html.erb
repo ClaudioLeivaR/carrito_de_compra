@@ -1,8 +1,13 @@
+<form action=""><h3></h3></form>
+<div class="mb-3">
 <%= form_with(model: categoria) do |formulario| %>
-    <%= formulario.label :categoria %>
-    <%= formulario.text_field :categoria %>
+    <%= formulario.label :categoria, class:'form-label' %>
+    <%= formulario.text_field :categoria, class: 'form-control',autofocus:'autofocus' %>
     <% if categoria.errors[:categoria].any?  %>
         <%= categoria.errors[:categoria].first %>
     <%end %>
-    <%= formulario.submit 'Enviar' %>
+    <br>
+    <%= formulario.submit class: 'btn btn-primary' do %>
+    <% end %>
 <% end %>
+</div>

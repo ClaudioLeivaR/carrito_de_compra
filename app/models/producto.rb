@@ -8,5 +8,5 @@ class Producto < ApplicationRecord
     validates(:precio, presence: true)
     validates(:descripcion, presence: true)
     validates(:cantidad, presence: true)
-
+    validates(:categoria_id,    presence: true)
 end

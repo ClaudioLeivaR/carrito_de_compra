@@ -34,7 +34,7 @@ class CategoriasController < ApplicationController
     # PUT/PATCH
     def actualizar
         if @categoria.update(params_categoria)
-            redirect_to categoria_path
+            redirect_to action: :listar
         else
             render :editar
         end
