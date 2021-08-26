@@ -2,7 +2,7 @@ class ProductosController < ApplicationController
 
     # GET
     def listar
-        @productos = Producto.includes(:categoria).select(:id,:nombre, :precio, :cantidad, :categoria_id).order(nombre: :asc)
+        @productos = Producto.includes(:categoria).select(:id,:nombre,:descripcion, :precio, :cantidad, :categoria_id).order(nombre: :asc)
     end
 
     # GET

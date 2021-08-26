@@ -15,7 +15,7 @@
     <div class="mb-3">
         <%= f.label :descripcion , class: 'form-label'%>
         <%= f.text_field :descripcion , class: 'form-control'%>
-             <% if producto.errors[:descripcion].any?  %>
+            <% if producto.errors[:descripcion].any?  %>
                 <div style="color: red;">
                 <%= producto.errors[:descripcion].first %>
                 </div>

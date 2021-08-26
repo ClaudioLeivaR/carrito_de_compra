@@ -4,7 +4,9 @@
     <%= formulario.label :categoria, class:'form-label' %>
     <%= formulario.text_field :categoria, class: 'form-control',autofocus:'autofocus' %>
     <% if categoria.errors[:categoria].any?  %>
-        <%= categoria.errors[:categoria].first %>
+        <div style="color: red;">
+            <%= categoria.errors[:categoria].first %>
+        </div>
     <%end %>
     <br>
     <%= formulario.submit class: 'btn btn-primary' do %>
