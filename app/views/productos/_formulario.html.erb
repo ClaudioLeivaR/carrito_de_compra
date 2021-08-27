@@ -44,20 +44,49 @@
 
     <div class="mb-3">
         <%= f.label :categoria_id , class: 'form-label'%>
-        <%= f.select(:categoria_id ,
-        options_from_collection_for_select(categorias, :id, :categoria),
-        {include_blank:'Elige una categoria'},
-        {class: 'form-select'})%>
-            <% if producto.errors[:categoria_id].any?  %>
-                <div style="color: red;">
+
+        <% if producto.categoria %>
+            <%= f.select(:categoria_id ,
+            options_from_collection_for_select(categorias, :id, :categoria, producto.categoria_id),
+            {include_blank:'Elige una categoria'},
+            {class: 'form-select'})%>
+        
+        <% else %>
+            <%= f.select(:categoria_id ,
+            options_from_collection_for_select(categorias, :id, :categoria),
+            {include_blank:'Elige una categoria'},
+            {class: 'form-select'})%>
+        
+        <% end %>
+
+        <% if producto.errors[:categoria_id].any?  %>
+            <div style="color: red;">
                 <%= producto.errors[:categoria_id].first %>
-                </div>
-            <%end %>
+            </div>
+        <%end %>
     </div>
+
+            <% if @producto.imagenes.attached? %>
+                <% @producto.imagenes.each do |img| %>
+                    <div class="mb-3 col-6">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-inline"><%= image_tag img, class: 'w-100' %></div>
+                                <span class="badge ">
+                                    <%= link_to eliminar_foto_path(@producto, img), method: :delete, data: { confirm: '¿Seguro quieres eliminar la foto?' }, class:"btn btn-danger" do %>                   
+                                        <i class="bi bi-trash-fill"></i>
+                                        Eliminar
+                                    <% end %>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                <% end %>
+            <% end %>
 
     <div class="mb-3">
         <%= f.label :imagenes , class: 'form-label'%>
-        <%= f.file_field :imagenes, multiple: true , class: 'form-control'%>
+        <%= f.file_field :imagenes, multiple: true , class: 'form-control', accept: '.jpg, .png, .jpeg'%>
     </div>
 <br>
 <br>

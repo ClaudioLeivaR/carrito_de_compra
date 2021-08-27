@@ -19,12 +19,19 @@ Agregar nuevo producto
 
 <% @productos.each do |producto| %>
     <div class="row justify-content-between fila">
+            
             <div class="col-1">
-                <% producto.imagenes.each do |img| %>
-                <%= image_tag img, width:100 %>
-            <% end %>
+                
+                    <% if producto.imagenes.attached? %>
+                        <%= link_to producto_path(producto) do  %>
+                            <%= image_tag producto.imagenes.first, style: 'width:100%' %>
+                        <% end %>
+                    <% else %>
+                        No hay imagenes registradas
+                    <% end %>
+        
             </div>
-            <div class="col-1"><%= producto.nombre %></div>
+            <div class="col-1"><%= link_to producto.nombre, producto %></div>
             <div class="col-1"><%= producto.descripcion %></div>
             <div class="col-1"><%= producto.precio %></div>
             <div class="col-1"><%= producto.cantidad %></div>

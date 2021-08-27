@@ -16,8 +16,10 @@ Rails.application.routes.draw do
   get 'productos/:id',          to: 'productos#mostrar',  as: 'producto'
   get 'productos/:id/editar',   to: 'productos#editar',   as: 'editar_producto'
 
-  post    'productos',     to: 'productos#guardar'
-  put     'productos/:id', to: 'productos#actualizar'
-  patch   'productos/:id', to: 'productos#actualizar'
-  delete  'productos/:id', to: 'productos#eliminar'
+  post    'productos'                         , to: 'productos#guardar'
+  put     'productos/:id'                     , to: 'productos#actualizar'
+  patch   'productos/:id'                     , to: 'productos#actualizar'
+  delete  'productos/:id'                     , to: 'productos#eliminar'
+  
+  delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as: 'eliminar_foto'
 end
