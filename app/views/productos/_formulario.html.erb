@@ -67,31 +67,22 @@
     </div>
 
             <% if @producto.imagenes.attached? %>
-                <% @producto.imagenes.each do |img| %>
-                    <div class="mb-3 col-6">
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-inline"><%= image_tag img, class: 'w-100' %></div>
-                                <span class="badge ">
-                                    <%= link_to eliminar_foto_path(@producto, img), method: :delete, data: { confirm: '¿Seguro quieres eliminar la foto?' }, class:"btn btn-danger" do %>                   
-                                        <i class="bi bi-trash-fill"></i>
-                                        Eliminar
-                                    <% end %>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                <% end %>
-            <% end %>
-
+                <%= render 'lista_fotos', producto: producto %>
+            <%end %>
     <div class="mb-3">
         <%= f.label :imagenes , class: 'form-label'%>
         <%= f.file_field :imagenes, multiple: true , class: 'form-control', accept: '.jpg, .png, .jpeg'%>
+            <% if producto.errors[:imagenes].any?  %>
+                <div style="color: red;">
+                <%= producto.errors[:imagenes].first %>
+                </div>
+            <% end %>
     </div>
-<br>
-<br>
+    <br>
+    <br>
 
     <%= f.submit class: 'btn btn-primary' do%>    
     <% end %>
-    
 <% end %>
+    
+
