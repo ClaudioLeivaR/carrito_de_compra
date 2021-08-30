@@ -1,0 +1,31 @@
+<div class="card" >
+    
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Carrito</li>
+    <li class="list-group-item">
+        <% @carro.productos.each do |producto_en_carrito| %>
+            <div class="row">
+                <div class= "col-3">
+                    <%= image_tag producto_en_carrito.imagenes.first, class: 'w-100' %>
+                </div>
+                <div class="col-3">
+                    <h4><%= producto_en_carrito.nombre %></h4>
+                    <p><%= producto_en_carrito.descripcion %></p>
+                    <p><b>categoria: </b><%= producto_en_carrito.categoria.categoria %></p>
+                </div>
+            
+                <div class='col-3 text-end'>
+                    <%= producto_en_carrito.precio %> CLP $  
+                </div>
+            </div>
+        <% end %>
+
+    </li>
+    <li class="list-group-item">
+    <strong>
+    Subtotal:  <%= @carro.total %> 
+    </strong>
+    </li>
+  </ul>
+  
+</div>
