@@ -1,0 +1,35 @@
+<h1 class="titulo-seccion">Destinos</h1>
+
+<%= link_to nuevo_destino_path, class: "btn btn-success boton-crear-derecha" do %>
+    <i class="bi bi-plus-circle"></i>
+    Crear nuevo destino
+<% end %>
+
+<div class="tabla-categorias">
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <h4>Nombre</h4>
+        </div>
+        <div class="col-4">
+            <h4>Región</h4>
+        </div>
+        <div class="col-4">
+            <h4>Opciones</h4>
+        </div>
+    </div>
+
+    <% @destinos.each do |destino| %>
+        <div class="row justify-content-between fila">
+            <div class="col-4"><%= destino.nombre %></div>
+            <div class="col-4"><%= destino.region.nombre %></div>
+            <div  class="col-4">
+                <%= link_to editar_destino_path(destino), class: "btn btn-warning boton-editar" do %>
+                    <i class="bi bi-pencil-fill"></i> 
+                <% end %>
+                <%= link_to destino_path(destino), method: :delete, data: { confirm: '¿Quieres eliminar la destino?' }, class: "btn btn-danger" do %>                   
+                        <i class="bi bi-trash-fill"></i> 
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

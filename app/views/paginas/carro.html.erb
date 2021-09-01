@@ -1,31 +1,68 @@
-<div class="card" >
+<div class="row">
+    <div class="col-10">
     
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Carrito</li>
-    <li class="list-group-item">
-        <% @carro.productos.each do |producto_en_carrito| %>
-            <div class="row">
-                <div class= "col-3">
-                    <%= image_tag producto_en_carrito.imagenes.first, class: 'w-100' %>
-                </div>
-                <div class="col-3">
-                    <h4><%= producto_en_carrito.nombre %></h4>
-                    <p><%= producto_en_carrito.descripcion %></p>
-                    <p><b>categoria: </b><%= producto_en_carrito.categoria.categoria %></p>
-                </div>
-            
-                <div class='col-3 text-end'>
-                    <%= producto_en_carrito.precio %> CLP $  
-                </div>
-            </div>
-        <% end %>
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Carrito</li>
+                <li class="list-group-item">
+                    <% @carro.carros_contenidos.each do |contenido_carrito| %>
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <%= image_tag contenido_carrito.producto.imagenes.first, class: 'w-100' %>
+                            </div>
+                            <div class="col-3">
+                                <h4><%= contenido_carrito.producto.nombre %></h4>
+                                <p><%= contenido_carrito.producto.descripcion %></p>
+                                <p> <b>Categoría:</b> <%= contenido_carrito.producto.categoria.categoria %></p>
+                                <p>Cantidad:</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <%= link_to '-', 
+                                        disminuir_producto_path(contenido_carrito.producto), 
+                                        method: :delete,
+                                        class: 'btn btn-secondary'%>
+                                    </div>
+                                    <div class="col">
+                                        <p><%= contenido_carrito.cantidad %></p>
+                                    </div>
+                                    <div class="col">
+                                        <%= link_to '+', 
+                                        aumentar_producto_path(contenido_carrito.producto), 
+                                        method: :put, 
+                                        class: 'btn btn-secondary',
+                                        remote: true %>
+                                    </div>
+                                </div>
+                                
 
-    </li>
-    <li class="list-group-item">
-    <strong>
-    Subtotal:  <%= @carro.total %> 
-    </strong>
-    </li>
-  </ul>
-  
+
+                                <%= link_to eliminar_producto_path(contenido_carrito.producto), method: :delete do %>
+                                    Eliminar
+                                <% end %>
+
+                            </div>
+                            <div class="col-3 text-end">
+                                <%= contenido_carrito.producto.precio %> CLP
+                            </div>
+                        </div>
+                    <% end %>
+                </li>
+                <li class="list-group-item text-end">
+                    <strong>
+                        Subtotal: <%= @carro.total %> 
+                    </strong>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="card">
+            <div class="card-body">
+                <p><%= @carro.total  %></p>
+                <%= link_to "Continuar con el pedido", nuevo_pedido_path, class: 'btn btn-primary' %>
+            </div>
+        </div>
+        
+    </div>
 </div>

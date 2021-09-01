@@ -1,0 +1,2 @@
+class TiposPago < ApplicationRecord
+end

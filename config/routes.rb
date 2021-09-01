@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
   #Paginas
-  root 'paginas#inicio'
-  get '/carrito', to: 'paginas#carro'
-
+  root  'paginas#inicio'
+  get   '/carrito', to: 'paginas#carro', ass: 'carrito'
+  
+  
 #Carros
-
-post 'carros/:id_producto', to: 'carros#agregar_producto', as: 'agregar_producto'
+put     'carros/:id_producto/cantidad'   , to: 'carros#aumentar_cantidad_producto'   , as: 'aumentar_producto'
+post    'carros/:id_producto'            , to: 'carros#agregar_producto'             , as: 'agregar_producto'
+delete  'carros/:id_producto'             , to: 'carros#eliminar_producto'            , as: 'eliminar_producto'
+delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_producto'  , as: 'disminuir_producto'
 
 
 
@@ -33,4 +36,23 @@ post 'carros/:id_producto', to: 'carros#agregar_producto', as: 'agregar_producto
   delete  'productos/:id'                     , to: 'productos#eliminar'
   
   delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as: 'eliminar_foto'
+
+
+  # detinos
+  get 'destinos',             to: 'destinos#listar',  as: 'destinos'
+  get 'destinos/crear',       to: 'destinos#crear',   as: 'nuevo_destino'
+  get 'destinos/:id',         to: 'destinos#mostrar', as: 'destino'
+  get 'destinos/:id/editar',  to: 'destinos#editar',  as: 'editar_destino'
+
+  post    'destinos',     to: 'destinos#guardar'
+  put     'destinos/:id', to: 'destinos#actualizar'
+  patch   'destinos/:id', to: 'destinos#actualizar'
+  delete  'destinos/:id', to: 'destinos#eliminar'
+
+  #pedidos
+
+  get   'pedidos/crear',  to: 'pedidos#crear'   ,  as: 'nuevo_envio'
+  post  'pedidos'      ,  to: 'pedidos#guardar' ,  as: 'crear_pedido_cliente'
+
+
 end

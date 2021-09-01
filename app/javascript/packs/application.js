@@ -11,3 +11,13 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+window.addEventListener("load", () => {
+    const links = document.querySelectorAll("a[data-remote]");
+    links.forEach((element) => {
+        element.addEventListener("ajax:success", () => {
+            //console.log("AJAX cumplido")
+            alert("ajax!")
+        });
+    });
+}); 

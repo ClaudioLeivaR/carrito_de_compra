@@ -1,5 +1,7 @@
 class ProductosController < ApplicationController
+
     before_action :asignar_producto, only: [:mostrar, :editar, :actualizar, :eliminar , :eliminar_foto]
+    
     # GET
     def listar
         @productos = Producto.includes(:categoria).select(:id,:nombre,:descripcion, :precio, :cantidad, :categoria_id).order(nombre: :asc)
