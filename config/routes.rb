@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #Paginas
   root  'paginas#inicio'
   get   '/carrito', to: 'paginas#carro', ass: 'carrito'
-  
+  get 'enviar', to: 'paginas#enviar_saludo'
   
 #Carros
 put     'carros/:id_producto/cantidad'   , to: 'carros#aumentar_cantidad_producto'   , as: 'aumentar_producto'
@@ -51,7 +51,8 @@ delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_produ
 
   #pedidos
 
-  get   'pedidos/crear',  to: 'pedidos#crear'   ,  as: 'nuevo_envio'
+  get   'pedidos/crear',  to: 'pedidos#crear'   ,  as: 'nuevo_pedido'
+  get   'pedidos'       , to: 'pedidos#pagar'   , as: 'pagar'
   post  'pedidos'      ,  to: 'pedidos#guardar' ,  as: 'crear_pedido_cliente'
 
 

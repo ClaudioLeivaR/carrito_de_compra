@@ -5,6 +5,9 @@ class Producto < ApplicationRecord
     has_many :carros_contenidos
     has_many :carros, through: :carros_contenidos
 
+    has_many :detalles_pedidos
+    has_many :pedidos, through: :detalles_pedidos
+
     validates(:nombre, presence: true)
     validates(:nombre, uniqueness: true)
 

@@ -1,0 +1,23 @@
+<h1>hola <%= @datos_envio.nombre %>, tu pedido fue confirmado</h1>
+<br>
+<h3>codigo de producto: <%= @pedido.codigo %> </h3>
+
+<p>Datos de pedido:</p>
+    <ul>
+        <li>nombre:                    <%= @datos_envio.nombre %> </li>
+        <li>correo:                    <%= @datos_envio.correo %> </li>
+        <li>telefono:                    <%= @datos_envio.telefono %> </li>
+        <li>direccion:                    <%= @datos_envio.direccion %> </li>
+        <li>destino:                    <%= @pedido.destino.nombre %> </li>
+    </ul>
+
+    <h4>estos son tus productos: </h4>
+    <ul>
+        <% @pedido.detalles_pedidos.each do |detalle| %>
+            
+            <li> <%= detalle.producto.nombre %> |<%= detalle.producto.precio %>|<%= detalle.cantidad %></li>
+            
+        <% end %>
+    </ul>
+
+    <h5>Gracias por su compra</h5>

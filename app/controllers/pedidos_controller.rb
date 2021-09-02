@@ -1,11 +1,19 @@
 class PedidosController < ApplicationController
 
     before_action :validar_carro
+    
     # GET
     def crear
         @datos_envio = DatosEnvio.new
         @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
     end
+
+    #get
+    def pagar
+
+
+    end
+
 
     # POST
     def guardar
@@ -21,7 +29,7 @@ class PedidosController < ApplicationController
                     )
                     if @pedido.save
 
-                        @carro.carro_contenmidos.each do |contenido|
+                        @carro.carros_contenidos.each do |contenido|
                             DetallesPedido.create(
                                 pedido: @pedido,
                                 producto: contenido.producto,
@@ -29,7 +37,13 @@ class PedidosController < ApplicationController
                             )
                         end
 
-                        redirect_to action: :crear
+
+                    
+                        enviar_correo
+    
+                        eliminar_carrito
+    
+                        render :pagar
                     else
                         @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
                         render :crear
@@ -43,14 +57,28 @@ class PedidosController < ApplicationController
             @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
             render :crear
             
-    end
-
+        end
+    end    
     private
+    
     def params_datos_envio
         params.require(:datos_envio).permit(:nombre, :correo, :direccion, :telefono)
     end
 
     def params_destino
         params.require(:datos_envio).permit(:destino_id)
+    end
+
+    def enviar_correo
+        #enviar correo a cliente
+        ClienteMailer.with(
+            datos_envio_correo: @datos_envio,
+            pedido_correo: @pedido)
+            .enviar_correo_pedido.deliver_later
+    end
+
+    def eliminar_carrito
+        session[:carro_id] = nil
+        @carro.destroy
     end
 end
