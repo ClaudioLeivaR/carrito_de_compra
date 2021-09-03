@@ -1,13 +1,13 @@
-<h1>hola <%= @datos_envio.nombre %>, tu pedido fue confirmado</h1>
+<h1>hola <%= @datos_formulario.nombre %>, tu pedido fue confirmado</h1>
 <br>
 <h3>codigo de producto: <%= @pedido.codigo %> </h3>
 
 <p>Datos de pedido:</p>
     <ul>
-        <li>nombre:                    <%= @datos_envio.nombre %> </li>
-        <li>correo:                    <%= @datos_envio.correo %> </li>
-        <li>telefono:                    <%= @datos_envio.telefono %> </li>
-        <li>direccion:                    <%= @datos_envio.direccion %> </li>
+        <li>nombre:                    <%= @datos_formulario.nombre %> </li>
+        <li>correo:                    <%= @datos_formulario.correo %> </li>
+        <li>telefono:                    <%= @datos_formulario.telefono %> </li>
+        <li>direccion:                    <%= @datos_formulario.direccion %> </li>
         <li>destino:                    <%= @pedido.destino.nombre %> </li>
     </ul>
 

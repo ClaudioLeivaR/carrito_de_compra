@@ -1,0 +1,24 @@
+<h1 class="titulo-seccion ">Pedidos</h1>
+
+
+
+<div class="row justify-content-between fila">
+<div class="col-2"><h3>Codigo</h3></div>
+<div class="col-2"><h3>Destino</h3></div>
+<div class="col-2"><h3>Datos del envio</h3></div>
+<div class="col-2"><h3>Estado del pedido</h3></div>
+<div class="col-2"><h3>Total</h3></div>
+<div class="col-2"><h3>Fecha de compra</h3></div>
+
+
+
+<% @pedidos.each do |pedidos| %>
+    <div class="row justify-content-between fila">
+            <div class="col-2"><%= pedido.codigo %></div>
+            <div class="col-2"><%= pedido.desstino_id %></div>
+            <div class="col-2"><%= pedido.datos_envio_id %></div>
+            <div class="col-2"><%= pedido.estados_pedido %></div>
+            <div class="col-2"><%= pedido.total %></div>
+            <div class="col-2"><%= pedido.created_at %></div>
+    </div>       
+<% end %>

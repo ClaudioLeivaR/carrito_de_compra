@@ -1,24 +1,43 @@
 
-<%= form_with(model: @datos_envio, url: crear_pedido_cliente_path) do |formulario| %>
+<%= form_with(model: @datos_formulario, url: crear_pedido_cliente_path) do |formulario| %>
     <div class="mb-3">
         <%= formulario.label :nombre, class: 'form-label' %>
         <%= formulario.text_field :nombre, class: 'form-control' %>
-        
+        <% if @datos_formulario.errors[:nombre].any? %>
+            <div style="color: red;">
+                <%= @datos_formulario.errors[:nombre].first %>
+            </div>
+        <% end %>
     </div>
 
     <div class="mb-3">
         <%= formulario.label :correo, class: 'form-label' %>
         <%= formulario.text_field :correo, class: 'form-control' %>
+        <% if @datos_formulario.errors[:correo].any? %>
+            <div style="color: red;">
+                <%= @datos_formulario.errors[:correo].first %>
+            </div>
+        <% end %>
     </div>
 
     <div class="mb-3">
         <%= formulario.label :direccion, class: 'form-label' %>
         <%= formulario.text_field :direccion, class: 'form-control' %>
+        <% if @datos_formulario.errors[:direccion].any? %>
+            <div style="color: red;">
+                <%= @datos_formulario.errors[:direccion].first %>
+            </div>
+        <% end %>
     </div>
 
     <div class="mb-3">
         <%= formulario.label :telefono, class: 'form-label' %>
         <%= formulario.text_field :telefono, class: 'form-control' %>
+        <% if @datos_formulario.errors[:telefono].any? %>
+            <div style="color: red;">
+                <%= @datos_formulario.errors[:telefono].first %>
+            </div>
+        <% end %>
     </div>
 
     <div class="mb-3">
@@ -27,6 +46,11 @@
             options_from_collection_for_select(@destinos, :id, :nombre),
             {include_blank: 'Elige un destino'},
             {class: 'form-select'}) %>
+            <% if @datos_formulario.errors[:destino_id].any? %>
+            <div style="color: red;">
+                <%= @datos_formulario.errors[:destino_id].first %>
+            </div>
+        <% end %>
     </div>
 
 

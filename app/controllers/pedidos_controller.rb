@@ -1,11 +1,14 @@
 class PedidosController < ApplicationController
-
+    include PedidosHelper
+    layout 'paginas'#, only[:crear, :pagar]
     before_action :validar_carro
+    before_action :validar_productos_carrito, only: :crear
     
     # GET
     def crear
-        @datos_envio = DatosEnvio.new
-        @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+        #@datos_envio = DatosEnvio.new
+        @datos_formulario = DatosEnvioFormulario.new
+        consultar_destinos
     end
 
     #get
@@ -17,57 +20,35 @@ class PedidosController < ApplicationController
 
     # POST
     def guardar
-        @datos_envio = DatosEnvio.new(params_datos_envio)
-        if params_destino[:destino_id].empty? == false
-            if @datos_envio.save
-                @pedido = Pedido.new(
-                    codigo: SecureRandom.hex(4).upcase,
-                    total: @carro.total,
-                    destino_id: params_destino[:destino_id],
-                    estados_pedido: EstadosPedido.find_by(estado: 'solicitado'),
-                    datos_envio: @datos_envio
-                    )
-                    if @pedido.save
+        @datos_formulario = DatosEnvioFormulario.new(params_datos_formulario)
+        
+        if @datos_formulario.valid? 
 
-                        @carro.carros_contenidos.each do |contenido|
-                            DetallesPedido.create(
-                                pedido: @pedido,
-                                producto: contenido.producto,
-                                cantidad: contenido.cantidad
-                            )
-                        end
-
-
+            @datos_envio = crar_datos_envio(@datos_formulario)
+            @pedido = definir_pedido(@carro.total, @datos_formulario, @datos_envio)
                     
+                if @pedido.save
+                    migrar_productos(@carro, @pedido)
                         enviar_correo
-    
                         eliminar_carrito
-    
                         render :pagar
                     else
-                        @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+                        consultar_destinos
                         render :crear
                     end
-            else
-                    @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
-                    render :crear
-            end
+            
         else
-            @datos_envio.errors.add(:destino_id, "Selecciona un destino")
-            @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+            consultar_destinos
             render :crear
             
         end
     end    
     private
     
-    def params_datos_envio
-        params.require(:datos_envio).permit(:nombre, :correo, :direccion, :telefono)
+    def params_datos_formulario
+        params.require(:pedidos_helper_datos_envio_formulario).permit(:nombre, :correo, :direccion, :telefono, :destino_id)
     end
 
-    def params_destino
-        params.require(:datos_envio).permit(:destino_id)
-    end
 
     def enviar_correo
         #enviar correo a cliente
@@ -80,5 +61,15 @@ class PedidosController < ApplicationController
     def eliminar_carrito
         session[:carro_id] = nil
         @carro.destroy
+    end
+
+    def consultar_destinos
+        @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+    end
+
+    def validar_productos_carrito
+        if @carro.productos.count == 0
+            redirect_to root_path
+        end
     end
 end

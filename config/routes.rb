@@ -52,8 +52,10 @@ delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_produ
   #pedidos
 
   get   'pedidos/crear',  to: 'pedidos#crear'   ,  as: 'nuevo_pedido'
-  get   'pedidos'       , to: 'pedidos#pagar'   , as: 'pagar'
+  get   'pagar'       , to: 'pedidos#pagar'   , as: 'pagar'
   post  'pedidos'      ,  to: 'pedidos#guardar' ,  as: 'crear_pedido_cliente'
 
+#admins
 
+  
 end
