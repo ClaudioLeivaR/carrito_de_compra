@@ -16,8 +16,7 @@
 #
 default: &default
   adapter: postgresql
-  username: <%= Rails.application.credentials.db[:nombre_usuario] %>
-  password: <%= Rails.application.credentials.db[:password] %>
+  
   host: 127.0.0.1
   port: 5432
 
@@ -27,6 +26,8 @@ default: &default
 
 development:
   <<: *default
+  username: <%= Rails.application.credentials.db[:nombre_usuario] %>
+  password: <%= Rails.application.credentials.db[:password] %>
   database: carrito_development
 
   # The specified database role being used to connect to postgres.
@@ -85,6 +86,7 @@ test:
 #
 production:
   <<: *default
+  username: <%= Rails.application.credentials.db_produccion[:nombre_usuario] %>
+  password: <%= Rails.application.credentials.db_produccion[:password] %>
   database: carrito_production
-  username: carrito
-  password: <%= ENV['CARRITO_DATABASE_PASSWORD'] %>
+  
