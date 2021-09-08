@@ -1,8 +1,12 @@
-
+namespace :deploy do
     desc "reload the database with seed data"
     task :semilla do
-        exec("cd #{current_path}; rails db:seed RAILS_ENV=production")
+        on roles(:all) do
+            within current_path do
+                execute :bundle:, exec:,"rails", "db:seed", "RAILS_ENV=production"
+            end
+        end
     end
-
-    after "deploy:migrating", "semilla"
+end
+    after "deploy:migrate", "semilla"
 
