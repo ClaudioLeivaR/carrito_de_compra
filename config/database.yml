@@ -88,5 +88,5 @@ production:
   <<: *default
   username: <%= Rails.application.credentials.db_produccion[:nombre_usuario] %>
   password: <%= Rails.application.credentials.db_produccion[:password] %>
-  database: carrito_production
+  database: carrito_produccion
   
