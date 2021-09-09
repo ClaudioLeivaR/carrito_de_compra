@@ -56,8 +56,14 @@ class ProductosController < ApplicationController
 
     # PUT/PATCH
     def actualizar
+        if params_producto[:estados_productos_id] == 0
+            @producto.estados_producto = EstadosProducto.find_by(estado: 'inactivo')
+        else
+            @producto.estados_producto = EstadosProducto.find_by(estado: 'activo')
+        end
+
         if @producto.update(params_producto)
-            redirect_to producto_path
+            redirect_to producto_path(@producto)
         else
             consultar_categorias
             render :editar
@@ -71,10 +77,12 @@ class ProductosController < ApplicationController
     end
 
     def eliminar
-        #todo: Configurar con active storage
+        #TODO: Configurar con active storage
+        #TODO: cambiar el estado del producto, No eliminarlo
         #@producto.imagenes.purge_later
-        @producto.destroy
+        @producto.estados_producto = EstadosProducto.find_by(estado: 'inactivo')
         #eliminar_foto
+        @producto.save
         redirect_to action: :listar
     end
 
@@ -82,6 +90,8 @@ class ProductosController < ApplicationController
     
     def asignar_producto
         @producto = Producto.find(params[:id])
+        rescue ActiveRecord::RecordNotFound
+            redirect_to action: :listar
     end
     
     def params_producto

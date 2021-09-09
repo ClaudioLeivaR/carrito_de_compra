@@ -1,6 +1,6 @@
-class EstadosPedido < ApplicationRecord
-    has_many :pedidos
-    
+class EstadosProducto < ApplicationRecord
+    has_many :productos
+
     validates(:estado, uniqueness: true)
     validates(:estado, presence: true)
 end

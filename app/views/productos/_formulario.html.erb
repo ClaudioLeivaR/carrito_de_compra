@@ -66,9 +66,19 @@
         <%end %>
     </div>
 
-            <% if @producto.imagenes.attached? %>
-                <%= render 'lista_fotos', producto: producto %>
-            <%end %>
+    <div class="form-switch mb-3" style= "padding-left=0">
+        <%= f.label :estados_producto_id,"Estado", class: 'form-label' %>
+        <% if producto.estados_producto.estado.eql? 'activo' %>
+            <%= f.check_box :estados_productos_id, class: 'form-check-input', checked: true, style: 'display:block; margin-left: 0;' %>
+        <% else %>
+            <%= f.check_box :estados_productos_id, class: 'form-check-input' , style: 'display:block; margin-left: 0;'%>
+        <% end %>
+    </div>
+
+    <% if @producto.imagenes.attached? %>
+        <%= render 'lista_fotos', producto: producto %>
+    <%end %>
+
     <div class="mb-3">
         <%= f.label :imagenes , class: 'form-label'%>
         <%= f.file_field :imagenes, multiple: true , class: 'form-control', accept: '.jpg, .png, .jpeg'%>

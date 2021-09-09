@@ -6,22 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 ## TiposPago.destroy_all
-if TiposPago.count == 0
+
+EstadosProducto.create([
+    {estado: 'activo'},
+    {estado: 'inactivo'}
+])
+
 TiposPago.create([
     {pago: 'efectivo'},
     {pago: 'tarjeta'},
 ])
-end
 
-if EstadosPedido.count == 0
+
+
 EstadosPedido.create([
     {estado: 'solicitado'},
     {estado: 'enviado'},
     {estado: 'entregado'}
 ])
-end
 
-if Region.count == 0
+
+
 Region.create([
     { nombre: 'Primera Region' },
     { nombre: 'Segunda Region' },
@@ -40,4 +45,3 @@ Region.create([
     { nombre: 'Décima Quinta Region' },
     { nombre: 'Décima Sexta Region' }
 ])
-end

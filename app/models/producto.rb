@@ -1,5 +1,12 @@
 class Producto < ApplicationRecord
+    # TODO: para clientes con rut \d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}
+    
+    #TODO: agregar valos por defecto al campo de estados_producto
+
     belongs_to :categoria
+    
+    belongs_to :estados_producto
+
     has_many_attached :imagenes
 
     has_many :carros_contenidos
@@ -24,11 +31,14 @@ class Producto < ApplicationRecord
     validate(:max_imagenes)
 
     private
+
     def max_imagenes
+        
         if self.imagenes.count > 4
             self.errors.add(:imagenes, "No puedes cargar mas de 4 fotos")
         #self.errors[:imagenes] = "No puedes agregar mas de 4 fotos"
         end
+    
     end
 
 end
