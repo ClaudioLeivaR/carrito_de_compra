@@ -74,6 +74,7 @@ class ProductosController < ApplicationController
         #todo: Configurar con active storage
         #@producto.imagenes.purge_later
         @producto.destroy
+        #eliminar_foto
         redirect_to action: :listar
     end
 
