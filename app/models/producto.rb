@@ -21,7 +21,7 @@ class Producto < ApplicationRecord
 
     validates(:categoria_id,    presence: true)
 
-    validate :max_imagenes
+    validate(:max_imagenes)
 
     private
     def max_imagenes

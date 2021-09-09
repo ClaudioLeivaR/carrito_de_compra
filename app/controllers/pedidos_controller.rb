@@ -24,7 +24,7 @@ class PedidosController < ApplicationController
         
         if @datos_formulario.valid? 
 
-            @datos_envio = crar_datos_envio(@datos_formulario)
+            @datos_envio = crear_datos_envio(@datos_formulario)
             @pedido = definir_pedido(@carro.total, @datos_formulario, @datos_envio)
                     
                 if @pedido.save

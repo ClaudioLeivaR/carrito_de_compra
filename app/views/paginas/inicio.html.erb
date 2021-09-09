@@ -3,7 +3,11 @@
 
 <% @todos_los_productos.each do |producto| %>
     <div class="card" style="width: 18rem;">
-    <%= image_tag producto.imagenes.first, class: 'card-img-top' %>
+        <% if producto.imagenes.attached? %>
+            <%= image_tag producto.imagenes.first, class: 'card-img-top' %>
+        <% else %>
+            No hay imagenes registradas
+        <% end %>
     <div class="card-body">
         <h5 class="card-title"><%= producto.nombre %></h5>
         <%= producto.precio.to_s[0..-3] %> CLP

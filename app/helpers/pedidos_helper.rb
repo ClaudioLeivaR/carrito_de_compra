@@ -16,7 +16,7 @@ module PedidosHelper
 
     end
 
-    def crar_datos_envio(datos_formulario)
+    def crear_datos_envio(datos_formulario)
         DatosEnvio.create(
             nombre:     datos_formulario.nombre,
             direccion:  datos_formulario.direccion,
