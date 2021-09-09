@@ -8,7 +8,12 @@
                     <% @carro.carros_contenidos.each do |contenido_carrito| %>
                         <div class="row justify-content-center">
                             <div class="col-3">
-                                <%= image_tag contenido_carrito.producto.imagenes.first, class: 'w-100' %>
+                                <% if producto.imagenes.attached? %>
+                                    <%= image_tag contenido_carrito.producto.imagenes.first, class: 'w-100' %>
+                                <% else %>
+                                    No hay imagenes registradas
+                                <% end %>
+                           
                             </div>
                             <div class="col-3">
                                 <h4><%= contenido_carrito.producto.nombre %></h4>
