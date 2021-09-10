@@ -33,7 +33,7 @@ delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_produ
   post    'productos'                         , to: 'productos#guardar'
   put     'productos/:id'                     , to: 'productos#actualizar'
   patch   'productos/:id'                     , to: 'productos#actualizar'
-  delete  'productos/:id'                     , to: 'productos#eliminar'
+  #delete  'productos/:id'                     , to: 'productos#eliminar' ya no se utiliza por que todo producto se marca como inactivo.
   
   delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as: 'eliminar_foto'
 

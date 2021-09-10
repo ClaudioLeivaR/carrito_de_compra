@@ -68,11 +68,15 @@
 
     <div class="form-switch mb-3" style= "padding-left=0">
         <%= f.label :estados_producto_id,"Estado", class: 'form-label' %>
-        <% if producto.estados_producto.estado.eql? 'activo' %>
-            <%= f.check_box :estados_productos_id, class: 'form-check-input', checked: true, style: 'display:block; margin-left: 0;' %>
-        <% else %>
-            <%= f.check_box :estados_productos_id, class: 'form-check-input' , style: 'display:block; margin-left: 0;'%>
-        <% end %>
+            <% if producto.estados_producto %> 
+                <% if producto.estados_producto.estado.eql? 'activo' %>
+                    <%= f.check_box :estados_productos_id, class: 'form-check-input', checked: true, style: 'display:block; margin-left: 0;' %>
+                <% else %>
+                    <%= f.check_box :estados_productos_id, class: 'form-check-input' , style: 'display:block; margin-left: 0;'%>
+                <% end %>
+            <% else %><!--Crear producto-->
+                <%= f.check_box :estados_productos_id, class: 'form-check-input' ,checked: true, style: 'display:block; margin-left: 0;'%>
+            <% end %>
     </div>
 
     <% if @producto.imagenes.attached? %>
