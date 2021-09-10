@@ -6,7 +6,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-inline"><%= image_tag img, style: "width: 10rem" %></div>
                         <span class="badge ">
-                            <%= link_to eliminar_foto_path(producto, img), method: :delete, data: { confirm: '¿Seguro quieres eliminar la foto?' }, class:"btn btn-danger" do %>                   
+                            <%= link_to admin_eliminar_foto_path(producto, img), method: :delete, data: { confirm: '¿Seguro quieres eliminar la foto?' }, class:"btn btn-danger" do %>                   
                                 <i class="bi bi-trash-fill"></i>
                                 Eliminar
                             <% end %>

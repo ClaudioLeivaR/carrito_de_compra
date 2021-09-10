@@ -17,7 +17,7 @@ class CarrosController < ApplicationController
 
         # @carro.productos << Producto.find(params[:id_producto])
         # actualizar_total
-        # redirect_to root_path
+        redirect_to root_path
     end
 
     # POST carros/:id_producto/cantidad

@@ -11,7 +11,15 @@ post    'carros/:id_producto'            , to: 'carros#agregar_producto'        
 delete  'carros/:id_producto'             , to: 'carros#eliminar_producto'            , as: 'eliminar_producto'
 delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_producto'  , as: 'disminuir_producto'
 
+  #pedidos cliente
 
+  get   'pedidos/crear',  to: 'pedidos#crear'   ,  as: 'nuevo_pedido'
+  get   'pagar'       , to: 'pedidos#pagar'   , as: 'pagar'
+  post  'pedidos'      ,  to: 'pedidos#guardar' ,  as: 'crear_pedido_cliente'
+
+#admins
+
+  namespace :admin do
 
   # categorias
   get 'categorias',             to: 'categorias#listar',  as: 'categorias'
@@ -23,19 +31,6 @@ delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_produ
   put     'categorias/:id', to: 'categorias#actualizar'
   patch   'categorias/:id', to: 'categorias#actualizar'
   delete  'categorias/:id', to: 'categorias#eliminar'
-  
-  # productos
-  get 'productos',              to: 'productos#listar',   as: 'productos'
-  get 'productos/crear',        to: 'productos#crear',    as: 'nuevo_producto'
-  get 'productos/:id',          to: 'productos#mostrar',  as: 'producto'
-  get 'productos/:id/editar',   to: 'productos#editar',   as: 'editar_producto'
-
-  post    'productos'                         , to: 'productos#guardar'
-  put     'productos/:id'                     , to: 'productos#actualizar'
-  patch   'productos/:id'                     , to: 'productos#actualizar'
-  #delete  'productos/:id'                     , to: 'productos#eliminar' ya no se utiliza por que todo producto se marca como inactivo.
-  
-  delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as: 'eliminar_foto'
 
 
   # detinos
@@ -49,13 +44,24 @@ delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_produ
   patch   'destinos/:id', to: 'destinos#actualizar'
   delete  'destinos/:id', to: 'destinos#eliminar'
 
-  #pedidos
+# productos
+get 'productos',              to: 'productos#listar',   as: 'productos'
+get 'productos/crear',        to: 'productos#crear',    as: 'nuevo_producto'
+get 'productos/:id',          to: 'productos#mostrar',  as: 'producto'
+get 'productos/:id/editar',   to: 'productos#editar',   as: 'editar_producto'
 
-  get   'pedidos/crear',  to: 'pedidos#crear'   ,  as: 'nuevo_pedido'
-  get   'pagar'       , to: 'pedidos#pagar'   , as: 'pagar'
-  post  'pedidos'      ,  to: 'pedidos#guardar' ,  as: 'crear_pedido_cliente'
+post    'productos'                         , to: 'productos#guardar'
+put     'productos/:id'                     , to: 'productos#actualizar'
+patch   'productos/:id'                     , to: 'productos#actualizar'
+#delete  'productos/:id'                     , to: 'productos#eliminar' ya no se utiliza por que todo producto se marca como inactivo.
 
-#admins
+delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as: 'eliminar_foto'
 
-  
+
+#PEDIDOS ADMIN
+    get 'pedidos', to: 'pedidos#listar', as: 'pedidos'
+
+  end
+
+
 end

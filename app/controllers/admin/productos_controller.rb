@@ -1,4 +1,4 @@
-class ProductosController < ApplicationController
+class Admin::ProductosController < Admin::AdminController
 
     include ProductosHelper
     before_action :asignar_producto, only: [:mostrar, :editar, :actualizar, :eliminar , :eliminar_foto]
@@ -64,7 +64,7 @@ class ProductosController < ApplicationController
         
         if @producto.update(params_producto)
             actualizar_estado(params_estado_producto, @producto)
-            redirect_to producto_path(@producto)
+            redirect_to admin_producto_path(@producto)
         else
             consultar_categorias
             render :editar
@@ -74,7 +74,7 @@ class ProductosController < ApplicationController
     #DELETE
     def eliminar_foto
         @producto.imagenes.find(params[:id_imagen]).purge
-        redirect_to editar_producto_path(@producto)
+        redirect_to admin_editar_producto_path(@producto)
     end
 
     def eliminar

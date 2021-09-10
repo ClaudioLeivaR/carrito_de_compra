@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-6 contenedor-formulario">
-        <%= form_with(model: destino) do |f| %>
+        <%= form_with(model: [:admin, destino]) do |f| %>
 
             <div class="mb-3">    
                 <%= f.label :nombre, class: 'form-label' %>

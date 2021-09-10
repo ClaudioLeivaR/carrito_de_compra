@@ -1,6 +1,6 @@
 <form action=""><h3></h3></form>
 <div class="mb-3">
-<%= form_with(model: categoria) do |formulario| %>
+<%= form_with(model: [:admin, categoria]) do |formulario| %>
     <%= formulario.label :categoria, class:'form-label' %>
     <%= formulario.text_field :categoria, class: 'form-control',autofocus:'autofocus' %>
     <% if categoria.errors[:categoria].any?  %>

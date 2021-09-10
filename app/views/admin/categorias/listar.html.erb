@@ -1,0 +1,26 @@
+<h1 class="titulo-seccion ">Categorias</h1>
+
+<%= link_to  admin_nueva_categoria_path, class:"btn btn-success boton-crear-derecha" do %>
+    <i class="bi bi-plus"></i>
+    Agregar nueva categoria
+<% end %>
+
+
+    <div class="row justify-content-between fila">
+    <div class="col-10"><h3>Nombre</h3></div>
+    <div class="col-2"><h3>Opciones</h3></div>
+    </div>
+    
+<% @categorias.each do |categoria| %>
+    <div class="row justify-content-between fila">
+        <div class="col-10"><%= categoria.categoria %></div>
+        <div class = "col-2">
+            <%= link_to admin_editar_categoria_path(categoria),class:"btn btn-primary"  do %>
+                <i class="bi bi-pencil-fill"></i> 
+            <% end %>
+            <%= link_to admin_categoria_path(categoria), method: :delete, data: { confirm: '¿Quieres eliminar la categoria?' },class:"btn btn-warning"  do %>
+                <i class="bi bi-trash-fill"></i>                   
+            <% end %>
+        </div>
+    </div>
+<% end %>

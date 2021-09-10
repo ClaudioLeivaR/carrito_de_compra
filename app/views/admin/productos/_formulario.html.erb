@@ -1,7 +1,7 @@
 
 
 
-<%= form_with(model: producto) do |f| %>
+<%= form_with(model: [:admin, producto]) do |f| %>
     <div class="mb-3">
         <%= f.label :nombre , class: 'form-label' %>
         <%= f.text_field :nombre , class: 'form-control'%>

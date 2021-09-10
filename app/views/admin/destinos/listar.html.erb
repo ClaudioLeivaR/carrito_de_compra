@@ -1,6 +1,6 @@
 <h1 class="titulo-seccion">Destinos</h1>
 
-<%= link_to nuevo_destino_path, class: "btn btn-success boton-crear-derecha" do %>
+<%= link_to admin_nuevo_destino_path, class: "btn btn-success boton-crear-derecha" do %>
     <i class="bi bi-plus-circle"></i>
     Crear nuevo destino
 <% end %>
@@ -23,10 +23,10 @@
             <div class="col-4"><%= destino.nombre %></div>
             <div class="col-4"><%= destino.region.nombre %></div>
             <div  class="col-4">
-                <%= link_to editar_destino_path(destino), class: "btn btn-warning boton-editar" do %>
+                <%= link_to admin_editar_destino_path(destino), class: "btn btn-warning boton-editar" do %>
                     <i class="bi bi-pencil-fill"></i> 
                 <% end %>
-                <%= link_to destino_path(destino), method: :delete, data: { confirm: '¿Quieres eliminar la destino?' }, class: "btn btn-danger" do %>                   
+                <%= link_to admin_destino_path(destino), method: :delete, data: { confirm: '¿Quieres eliminar la destino?' }, class: "btn btn-danger" do %>                   
                         <i class="bi bi-trash-fill"></i> 
                 <% end %>
             </div>

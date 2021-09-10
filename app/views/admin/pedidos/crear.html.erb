@@ -1,5 +1,5 @@
 
-<%= form_with(model: @datos_formulario, url: crear_pedido_cliente_path) do |formulario| %>
+<%= form_with(model: @datos_formulario, url: admin_crear_pedido_cliente_path) do |formulario| %>
     <div class="mb-3">
         <%= formulario.label :nombre, class: 'form-label' %>
         <%= formulario.text_field :nombre, class: 'form-control' %>
