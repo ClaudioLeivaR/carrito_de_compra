@@ -1,20 +1,35 @@
+<% if flash[:errors] %>
+    <div class="alert alert-warning" role="alert">
+        <%= flash[:errors] %>
+    </div>
+<% end %>
+
 <div class="tabla-categorias">
     <div class="row justify-content-between">
-        <div class="col-4">
+        
+        <div class="col-3">
             <h4>Codigo</h4>
         </div>
-        <div class="col-4">
+        
+        <div class="col-3">
             <h4>Fecha de compra</h4>
         </div>
-        <div class="col-4">
+        
+        <div class="col-3">
             <h4>Valor</h4>
         </div>
+        
+        <div class="col-3">
+            <h4>Acciones</h4>
+        </div>
+    
     </div>
 <br>
 <% @pedidos.each do |pedido| %>
     <div class="row justify-content-between fila">
-        <div class= "col-4"><%= pedido.codigo %></div>
-        <div class= "col-4"><%= pedido.created_at.strftime(" %d-%m-%y") %></div>
-        <div class= "col-4"><%= pedido.total %></div>
+        <div class= "col-3"><%= pedido.codigo %></div>
+        <div class= "col-3"><%= pedido.created_at.strftime(" %d-%m-%y") %></div>
+        <div class= "col-3"><%= pedido.total %></div>
+        <div class= "col-3"> <%= link_to "Ver detalles", admin_pedido_path(pedido), class: 'btn btn-primary' %></div>
     </div>
 <% end %>

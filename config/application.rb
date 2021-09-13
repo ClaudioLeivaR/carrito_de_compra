@@ -16,7 +16,7 @@ module Carrito
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-     config.time_zone = "America/Santiago)"
+    config.time_zone = "America/Santiago"
     # config.eager_load_paths << Rails.root.join("extras")
     I18n.available_locales =[:es, :en]
     I18n.default_locale = :es

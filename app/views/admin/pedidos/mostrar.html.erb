@@ -1,0 +1,71 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Pedido</h5>
+        <h6 class="card-subtitle mb-2 text-muted">codigo <%= @pedido.codigo %></h6>
+        <p class="card-text"><strong>Nombre:    </strong><%= @pedido.datos_envio.nombre %></p>
+        <p class="card-text"><strong>Email:     </strong><%= @pedido.datos_envio.correo %></p>
+        <p class="card-text"><strong>Direccion: </strong><%= @pedido.datos_envio.direccion %></p>
+        <p class="card-text"><strong>Telefono:  </strong><%= @pedido.datos_envio.telefono %></p>
+        <p class="card-text"><strong>Ciudad:    </strong><%= @pedido.destino.nombre %></p>
+         <div class="alert alert-primary" role="alert">
+            <%= @pedido.estados_pedido.estado %>
+        </div>
+        <%= link_to "Editar", admin_editar_pedido_path(@pedido), class: 'btn btn-primary' %>
+        
+    </div>
+</div>
+<div class=sticky-top>
+        <strong>
+            TOTAL  : <%= @pedido.total %>
+        </strong>
+</div>
+
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h5 class="card-title">Productos</h5>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-2">
+                        <strong>
+                            Imágen
+                        </strong>
+                    </div>
+                    <div class="col">
+                        <strong>
+                            Nombre
+                        </strong>
+                    </div>
+                    <div class="col">
+                        <strong>
+                            Precio
+                        </strong>
+                    </div>
+                    <div class="col">
+                        <strong>
+                            Cantidad
+                        </strong>
+                    </div>
+                </div>
+                <% @pedido.detalles_pedidos.each do |detalle| %>
+                    <div class="row">
+                        <div class="col-2">
+                            <%= image_tag detalle.producto.imagenes.first, class: 'w-100' %>                
+                        </div>
+                        <div class="col">
+                            <%= detalle.producto.nombre %>                
+                        </div>
+                        <div class="col">
+                            <%= detalle.producto.precio %>                
+                        </div>
+                        <div class="col">
+                            <%= detalle.cantidad %>                
+                        </div>
+                    </div>
+                <% end %>
+                <!-- MOSTRAR LOS PRODUCTOS -->
+            </div>
+        </div>
+</div>
+</div>
