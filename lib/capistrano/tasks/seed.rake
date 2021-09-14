@@ -8,5 +8,5 @@ namespace :deploy do
         end
     end
 end
-    after "deploy:migrate", "semilla"
+    after "deploy:symlink:release", "semilla"
 
