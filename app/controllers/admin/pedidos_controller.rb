@@ -4,7 +4,7 @@ class Admin::PedidosController < Admin::AdminController
     before_action :asignar_pedido, only: [:mostrar, :editar, :actualizar]
 
     
-    
+
     #GET
     def listar
         @pedidos = Pedido.select(:id, :codigo, :total, :created_at).order(:created_at)

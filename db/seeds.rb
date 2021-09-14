@@ -25,8 +25,6 @@ EstadosPedido.create([
     {estado: 'entregado'}
 ])
 
-
-
 Region.create([
     { nombre: 'Primera Region' },
     { nombre: 'Segunda Region' },

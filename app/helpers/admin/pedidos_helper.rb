@@ -1,5 +1,4 @@
 module Admin::PedidosHelper
-    
     class PedidosFormulario
         include ActiveModel::Model
          
