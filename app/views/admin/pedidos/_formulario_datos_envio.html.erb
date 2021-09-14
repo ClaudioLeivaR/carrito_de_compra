@@ -1,4 +1,5 @@
 <%= form_with(model: datos_pedido, url: admin_pedido_path(datos_pedido) ) do |formulario| %>
+    
     <div class="mb-3">
         <%= formulario.label :nombre , class: 'form-label' %>
         <%= formulario.text_field :nombre , class: 'form-control'%>
@@ -17,6 +18,17 @@
                 </div>
             <%end %>
     </div>
+
+    <div class="mb-3">
+        <%= formulario.label :telefono , class: 'form-label' %>
+        <%= formulario.text_field :telefono , class: 'form-control'%>
+            <% if datos_pedido.errors[:telefono].any?  %>
+                <div style="color: red;">
+                <%= datos_pedido.errors[:telefono].first %>
+                </div>
+            <%end %>
+    </div>
+
     <div class="mb-3">
         <%= formulario.label :direccion , class: 'form-label' %>
         <%= formulario.text_field :direccion , class: 'form-control'%>
@@ -26,13 +38,33 @@
                 </div>
             <%end %>
     </div>
+    
     <div class="mb-3">
-        <%= formulario.label :destino_id , class: 'form-label' %>
-        <%= formulario.text_field :destino_id , class: 'form-control'%>
-            <% if datos_pedido.errors[:destino_id].any?  %>
-                <div style="color: red;">
+        <%= formulario.label :destino_id, class: 'form-label' %>
+        <%= formulario.select(:destino_id,
+            options_from_collection_for_select(destinos, :id, :nombre, datos_pedido.destino_id),
+            {include_blank: 'Elige un destino'},
+            {class: 'form-select'}) %>
+        <% if datos_pedido.errors[:destino_id].any? %>
+            <div style="color: red">
                 <%= datos_pedido.errors[:destino_id].first %>
-                </div>
-            <%end %>
+            </div>
+        <% end %>
     </div>
+
+     <div class="mb-3">
+        <%= formulario.label :estado_id, class: 'form-label' %>
+        <%= formulario.select(:estado_id,
+            options_from_collection_for_select(estados, :id, :estado, datos_pedido.estado_id),
+            {},
+            {class: 'form-select'}) %>
+        <% if datos_pedido.errors[:estado_id].any? %>
+            <div style="color: red">
+                <%= datos_pedido.errors[:estado_id].first %>
+            </div>
+        <% end %>
+    </div>
+
+    <%= formulario.submit "Actualizar pedido", class: 'btn btn-primary' %>
+
 <% end %>

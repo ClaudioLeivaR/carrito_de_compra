@@ -8,6 +8,7 @@ module Admin::PedidosHelper
         attr_accessor   :direccion
         attr_accessor   :telefono
         attr_accessor   :destino_id
+        attr_accessor   :estado_id
         
         validates(:nombre, presence: true)
         validates(:direccion, presence: true)

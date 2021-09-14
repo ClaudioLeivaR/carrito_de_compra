@@ -1,8 +1,7 @@
 <h1>Lista de Productos</h1>
 <br>
 
-
-<% @todos_los_productos.each do |producto| %>
+ <% @todos_los_productos.each do |producto| %>
     <div class="card" style="width: 18rem;">
         <% if producto.imagenes.attached? %>
             <%= image_tag producto.imagenes.first, class: 'card-img-top' %>
@@ -11,8 +10,29 @@
         <% end %>
     <div class="card-body">
         <h5 class="card-title"><%= producto.nombre %></h5>
-        <%= producto.precio.to_s[0..-3] %> CLP
+        CLP$ <%= producto.precio.to_s[0..-3] %>  <br>
         <%= link_to 'Agregar al carro', agregar_producto_path(producto), class: 'btn btn-primary', method: :post, remote: true %>
     </div>
     </div>
+<% end %> %>
+
+<div class="row justify-content-between">
+<% @todos_los_productos.each do |producto| %>
+    
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <% if producto.imagenes.attached? %>
+                    <%= image_tag producto.imagenes.first, class: 'card-img-top'%>
+                <% else %>
+                    No hay imagenes registradas
+                <% end %>
+            <div class="card-body">
+                <h5 class="card-title"><%= producto.nombre %></h5>
+                CLP$ <%= producto.precio.to_s[0..-3] %>  <br>
+                <%= link_to 'Agregar al carro', agregar_producto_path(producto), class: 'btn btn-primary', method: :post, remote: true %>
+            </div>
+            </div>
+        </div>
+       
 <% end %>
+</div> 
