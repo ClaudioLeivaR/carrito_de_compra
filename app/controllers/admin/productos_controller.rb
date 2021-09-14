@@ -7,12 +7,12 @@ class Admin::ProductosController < Admin::AdminController
     def listar
         
         @productos_activos      = Producto.includes(:categoria).select(:id,:nombre,:descripcion, :precio, :cantidad, :categoria_id).order(nombre: :asc).where("estados_producto_id=1")
-        @productos_inactivos    = Producto.includes(:categoria).select(:id,:nombre,:descripcion, :precio, :cantidad, :categoria_id).order(nombre: :asc).where("estados_producto_id=2")
+        @productos_inactivos    = Producto.includes(:categoria).select(:id,:nombre,:descripcion, :precio, :cantidad, :categoria_id).order(nombre: :asc).where("estados_producto_id=2 OR estados_producto_id = null")
     end
 
     # GET
     def mostrar
-      
+
         @columnas = case(@producto.imagenes.count)
 
         when 0
