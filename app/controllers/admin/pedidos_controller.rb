@@ -1,7 +1,7 @@
 class Admin::PedidosController < Admin::AdminController
    
     include Admin::PedidosHelper
-    before_action :asignar_pedido, only: [:mostrar, :editar, :actualizar]
+    before_action :asignar_pedido, except: [:listar, :crear, :guardar]
 
     
 
@@ -32,6 +32,8 @@ class Admin::PedidosController < Admin::AdminController
         @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
         
         @estados = EstadosPedido.select(:id, :estado).order(estado: :asc)
+
+        @productos = @pedido.detalles_pedidos #lkista de productos
     end
 
     
@@ -73,6 +75,48 @@ class Admin::PedidosController < Admin::AdminController
         #TODO analizas si eliminar pedido o cambioar su estado
     end
 
+    #todo definir un metodo para disminuir, aumentar, eliminar un  producto
+
+
+    def aumentar_cantidad_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        detalle_pedido.cantidad += 1
+        detalle_pedido.save
+
+        redirect_to action: :editar
+        # respond_to do |format|
+        #    format.json {render json: {id_ detalle_pedido.producto.id, cantidad: detalle_pedido.cantidad}}
+            
+        
+    end
+
+    # DELETE
+    def eliminar_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        detalle_pedido.destroy
+        redirect_to action: :editar
+    end
+
+    # DELETE
+    def disminuir_cantidad_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        if detalle_pedido.cantidad - 1 <= 0
+            detalle_pedido.destroy
+        else
+            detalle_pedido.cantidad -= 1
+            detalle_pedido.save
+        end
+        redirect_to action: :editar
+    end
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private
     def params_pedidos
         params.require(:admin_pedidos_helper_pedidos_formulario).permit(:nombre, :correo, :telefono, :direccion, :destino_id, :estado_id)
@@ -87,4 +131,8 @@ class Admin::PedidosController < Admin::AdminController
         flash[:errors] = "pedido no encontrado"
         redirect_to action: :listar
     end
+
+
 end
+
+
