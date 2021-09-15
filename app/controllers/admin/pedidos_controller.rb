@@ -18,6 +18,11 @@ class Admin::PedidosController < Admin::AdminController
 
     end
 
+    def agregar_producto
+        @todos_los_productos = Producto.select(:id, :nombre, :precio, :estados_producto_id)
+                                .order(nombre: :asc).where("estados_producto_id = 1 and cantidad > 0")
+    end
+
     def editar
         #TODOeditar la info de un pedido Excepto
         @datos_pedido = PedidosFormulario.new
@@ -42,7 +47,14 @@ class Admin::PedidosController < Admin::AdminController
     def guardar
 
     end
-
+    def guardar_producto
+    DetallesPedido.create(
+        pedido: @pedido,
+        producto_id: params[:id_producto],
+        cantidad: 1
+    )
+    redirect_to action: :editar
+end
     #put/patch
     def actualizar
         @datos_pedido = PedidosFormulario.new(params_pedidos)
@@ -108,14 +120,6 @@ class Admin::PedidosController < Admin::AdminController
         end
         redirect_to action: :editar
     end
-    
-    
-    
-    
-    
-    
-    
-    
     
     private
     def params_pedidos

@@ -1,6 +1,15 @@
 <div class="card mt-3">
     <div class="card-body">
-        <h5 class="card-title">Productos</h5>
+    <div class="row justify.-comntent-between">
+        <div class="col-4">
+             <h5 class="card-title">Productos</h5>
+        </div>
+    </div>
+         <div class="col-4 text-end">
+                <%= link_to "Agregar", admin_agregar_producto_pedido_path(pedido), class: 'btn btn-primary' %>
+            </div>
+        
+
         <div class="row">
             <div class="col-12">
                 <div class="row">
@@ -32,7 +41,7 @@
                 </div>
                 <br>
                 <% productos.each do |detalle| %>
-                    <div class="row">
+                    <div class="row mt-5">
                         <div class="col-2">
                             <%= image_tag detalle.producto.imagenes.first, class: 'w-100' %>                
                         </div>
@@ -49,7 +58,7 @@
                             class: 'btn btn-secondary',
                             remote: true %>
                             
-                            <%= detalle.cantidad %>         
+                            <span id="cantidad-producto-<%=detalle.producto.id%>"> <%= detalle.cantidad %>                </span>     
                             
                             <%= link_to "+",
                             admin_aumentar_producto_pedido_path(detalle.pedido_id, detalle.producto_id),

@@ -9,21 +9,30 @@
     </div>
 </div>
 
-<%= render 'formulario_datos_envio', datos_pedido: @datos_pedido, destinos: @destinos, estados: @estados  %>
-<%= render 'listar_productos', productos: @productos %>
-<div class="row">
+<div class="row mt-3 justify-content-end">
     <div class="col">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h6>
-                        <strong>
-                            TOTAL:
-                        </strong>
-                    </h6>
-                    <p>
-                        actualizar_total
-                    </p>
-                </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <h6>
+                    <strong>
+                        TOTAL:
+                    </strong>
+                </h6>
+                <p>
+                    <!-- TODO: AGREAR TOTAL CALCULADO -->
+                    <%= @pedido.total %> 💵💵
+                </p>
             </div>
+        </div>
     </div> <!-- TOTAL 📎 -->
 </div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <%= render 'formulario_datos_envio', datos_pedido: @datos_pedido, destinos: @destinos, estados: @estados  %>
+    </div>
+    <div class="col-lg-8">
+        <%= render 'listar_productos', productos: @productos, pedido: @pedido %>
+    </div>
+</div>
+

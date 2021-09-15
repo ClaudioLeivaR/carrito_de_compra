@@ -71,9 +71,11 @@ delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as
 
     #TODO Agregar rutas para disminuirm agregar y eliminar un producto de un pedido
 
-    delete  'pedidos/:id/producto/:id_producto/eliminar'     , to: 'pedidos#eliminar_producto'     , as: 'eliminar_producto_pedido'
-    delete  'pedidos/:id/producto/:id_producto'    , to: 'pedidos#disminuir_cantidad_producto'   , as: 'disminuir_producto_pedido'
-    put     'pedidos/:id/producto/:id_producto'    , to: 'pedidos#aumentar_cantidad_producto'    , as: 'aumentar_producto_pedido'
+    get     'pedidos/:id/productos',                        to: 'pedidos#agregar_producto'  ,             as: 'agregar_producto_pedido'
+    post    'pedidos/:id/productos/:id_producto',           to: 'pedidos#guardar_producto'              , as: 'guardar_producto_pedido'
+    delete  'pedidos/:id/producto/:id_producto/eliminar'     , to: 'pedidos#eliminar_producto'          , as: 'eliminar_producto_pedido'
+    delete  'pedidos/:id/producto/:id_producto'           , to: 'pedidos#disminuir_cantidad_producto'   , as: 'disminuir_producto_pedido'
+    put     'pedidos/:id/producto/:id_producto'           , to: 'pedidos#aumentar_cantidad_producto'    , as: 'aumentar_producto_pedido'
 
   
   
