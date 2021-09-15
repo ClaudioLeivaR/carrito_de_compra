@@ -48,13 +48,19 @@ class Admin::PedidosController < Admin::AdminController
 
     end
     def guardar_producto
-    DetallesPedido.create(
-        pedido: @pedido,
-        producto_id: params[:id_producto],
-        cantidad: 1
-    )
-    redirect_to action: :editar
-end
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        if detalle_pedido
+            detalle_pedido.cantidad += 1
+        else
+            detalle_pedido = DetallesPedido.new(
+                pedido: @pedido,
+                producto_id: params[:id_producto],
+                cantidad: 1
+            )
+        end
+        detalle_pedido.save
+        redirect_to action: :editar
+    end
     #put/patch
     def actualizar
         @datos_pedido = PedidosFormulario.new(params_pedidos)
