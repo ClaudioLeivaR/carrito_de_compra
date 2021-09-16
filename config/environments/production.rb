@@ -71,7 +71,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    domain:               'localhost:3000',
+    domain:               'claudioleiva.tk',
     address:              'smtp.gmail.com',
     port:                 587,
     user_name:            Rails.application.credentials.correo[:direccion] ,
