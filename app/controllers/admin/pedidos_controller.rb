@@ -7,14 +7,30 @@ class Admin::PedidosController < Admin::AdminController
 
     #GET
     def listar
-        @pedidos = Pedido.select(:id, :codigo, :total, :created_at).order(:created_at)
+        @pedidos = Pedido.select(:id, :estados_pedido_id, :codigo, :total, :created_at).order(created_at: :desc)
     end
-
+    #post
     def crear
-        #TODO mostrar el formulario para crear un pedido con productos
+     
+        @pedido = Pedido.new
+        @pedido.codigo          =   SecureRandom.hex(4).upcase
+        @pedido.total           =   0
+        @pedido.estados_pedido  =   EstadosPedido.find_by(estado: 'solicitado')
+        @pedido.destino         =   Destino.find_by(nombre: 'Sin destino')
+        @pedido.datos_envio     =   DatosEnvio.create(
+            nombre:     'Ingrese nombre',
+            telefono:   'ingrese telefono',
+            direccion:  'Ingrese direccion',
+            correo:     'Ingrese correo'
+        )
+        @pedido.save 
+
+        redirect_to admin_editar_pedido_path(@pedido)
+
+      
     end
     def mostrar
-        #TODO mostrar un pedido con todos los productos
+       
 
     end
 
@@ -24,7 +40,7 @@ class Admin::PedidosController < Admin::AdminController
     end
 
     def editar
-        #TODOeditar la info de un pedido Excepto
+        
         @datos_pedido = PedidosFormulario.new
         @datos_pedido.id            = @pedido.id
         @datos_pedido.nombre        = @pedido.datos_envio.nombre
@@ -32,21 +48,16 @@ class Admin::PedidosController < Admin::AdminController
         @datos_pedido.telefono      = @pedido.datos_envio.telefono
         @datos_pedido.direccion     = @pedido.datos_envio.direccion
         @datos_pedido.destino_id    = @pedido.destino.id
-        
         @datos_pedido.estado_id     = @pedido.estados_pedido.id
         @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
-        
         @estados = EstadosPedido.select(:id, :estado).order(estado: :asc)
-
         @productos = @pedido.detalles_pedidos #lkista de productos
     end
 
     
 
    #post
-    def guardar
-
-    end
+   
     def guardar_producto
         detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
         if detalle_pedido

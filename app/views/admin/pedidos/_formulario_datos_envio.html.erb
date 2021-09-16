@@ -1,4 +1,4 @@
-<%= form_with(model: datos_pedido, url: admin_pedido_path(datos_pedido) ) do |formulario| %>
+<%= form_with(model: datos_pedido) do |formulario| %>
     
     <div class="mb-3">
         <%= formulario.label :nombre , class: 'form-label' %>
@@ -65,7 +65,7 @@
         <% end %>
     </div>
 
-    <%= formulario.submit "Actualizar pedido", class: 'btn btn-primary' %>
+    <%= formulario.submit  class: 'btn btn-primary' %>
 
     
 

@@ -22,7 +22,8 @@ TiposPago.create([
 EstadosPedido.create([
     {estado: 'solicitado'},
     {estado: 'enviado'},
-    {estado: 'entregado'}
+    {estado: 'entregado'},
+    {estado: 'cancelado'}
 ])
 
 Region.create([
@@ -41,5 +42,10 @@ Region.create([
     { nombre: 'Décima Tercera Region' },
     { nombre: 'Décima Cuarta Region' },
     { nombre: 'Décima Quinta Region' },
-    { nombre: 'Décima Sexta Region' }
+    { nombre: 'Décima Sexta Region' },
+    { nombre: 'Sin region'}
 ])
+
+Destino.create(
+    {nombre: 'Sin destino', region: Region.find_by(nombre: 'Sin region')}
+)

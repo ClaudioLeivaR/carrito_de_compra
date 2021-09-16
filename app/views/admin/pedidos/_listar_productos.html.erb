@@ -1,19 +1,20 @@
-<div class="card mt-3">
+<div class="card mt-2">
     <div class="card-body">
-    <div class="row justify.-comntent-between">
-        <div class="col-4">
-             <h5 class="card-title">Productos</h5>
-        </div>
-    </div>
-         <div class="col-4 text-end">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <h4 class="card-title">
+                    Productos
+                </h4>
+            </div>
+            <div class="col-4 text-end">
                 <%= link_to "Agregar", admin_agregar_producto_pedido_path(pedido), class: 'btn btn-primary' %>
             </div>
+        </div>
         
-
-        <div class="row">
+        <div class="row  text-center mt-5">
             <div class="col-12">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-2">
                         <strong>
                             Imágen
                         </strong>
@@ -33,13 +34,12 @@
                             Cantidad
                         </strong>
                     </div>
-                    <div class="col">
+                    <div class="col text-end">
                         <strong>
-                        Eliminar
+                            Eliminar
                         </strong>
                     </div>
                 </div>
-                <br>
                 <% productos.each do |detalle| %>
                     <div class="row mt-5">
                         <div class="col-2">
@@ -52,22 +52,14 @@
                             <%= detalle.producto.precio %>                
                         </div>
                         <div class="col">
-                            <%= link_to "-",
-                            admin_disminuir_producto_pedido_path(detalle.pedido_id, detalle.producto_id),
-                            method: :delete, 
-                            class: 'btn btn-secondary',
-                            remote: true %>
+                            <%= link_to "-", admin_disminuir_producto_pedido_path(detalle.pedido_id, detalle.producto_id), method: :delete, remote: true, class: 'btn btn-secondary' %>
                             
-                            <span id="cantidad-producto-<%=detalle.producto.id%>"> <%= detalle.cantidad %>                </span>     
+                            <span id="cantidad-producto-<%=detalle.producto.id%>"> <%= detalle.cantidad %>                </span>
                             
-                            <%= link_to "+",
-                            admin_aumentar_producto_pedido_path(detalle.pedido_id, detalle.producto_id),
-                            method: :put,
-                            class: 'btn btn-secondary',
-                            remote: true%>       
+                            <%= link_to "+", admin_aumentar_producto_pedido_path(detalle.pedido_id, detalle.producto_id), method: :put, remote: true, class: 'btn btn-secondary' %>
                         </div>
-                        <div class="col">
-                            <%= link_to admin_eliminar_producto_pedido_path(detalle.pedido_id, detalle.producto_id),method: :delete, class: 'btn btn-danger' do %>
+                        <div class="col text-end">
+                            <%= link_to admin_eliminar_producto_pedido_path(detalle.pedido_id, detalle.producto_id), method: :delete, class: 'btn btn-danger' do %>
                                 <i class="bi bi-trash"></i>
                             <% end %>
                         </div>
@@ -76,5 +68,5 @@
                 <!-- MOSTRAR LOS PRODUCTOS -->
             </div>
         </div>
-</div>
+    </div>
 </div>

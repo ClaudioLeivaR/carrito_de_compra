@@ -59,12 +59,12 @@ delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as
 
 
 #PEDIDOS ADMIN
-    get 'pedidos',            to: 'pedidos#listar',   as: 'pedidos'
-    get 'peididos/cread',     to: 'pedidos#crear',    as: 'nuevo_pedido'
-    get 'pedidos/:id/',       to: 'pedidos#mostrar',   as: 'pedido'
+    get '/',            to: 'pedidos#listar',   as: 'pedidos'
+    #get 'pedidos/crear',     to: 'pedidos#crear',    as: 'nuevo_pedido'
+    get 'pedidos/:id',       to: 'pedidos#mostrar',   as: 'pedido'
     get 'pedidos/:id/editar', to: 'pedidos#editar',   as: 'editar_pedido'
 
-    post    'pedidos',          to: 'pedidos#guardar'     , as: 'pedidos_helper_pedidos_formularios'
+    post    'pedidos',          to: 'pedidos#crear'     , as: 'pedidos_helper_pedidos_formularios'
     put     'pedidos/:id',      to: 'pedidos#actualizar'
     patch   'pedidos/:id',      to: 'pedidos#actualizar'  , as: 'pedidos_helper_pedidos_formulario'
     delete  'pedidos:id',       to: 'pedidos#eliminar'
