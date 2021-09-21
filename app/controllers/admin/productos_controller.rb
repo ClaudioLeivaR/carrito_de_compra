@@ -31,7 +31,7 @@ class Admin::ProductosController < Admin::AdminController
     
     # GET
     def crear
-   
+
         @producto = Producto.new
         consultar_categorias
     end
@@ -46,7 +46,7 @@ class Admin::ProductosController < Admin::AdminController
 
     # POST
     def guardar
-         
+        
         @producto = Producto.new(params_producto)
         @producto.estados_producto = evaluar_estado(params_estado_producto)
         if @producto.save

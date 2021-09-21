@@ -27,7 +27,46 @@
                         Carrito <span class="badge bg-danger"><%= @carro.carros_contenidos.map{|p| p.cantidad}.sum %> </span>
                     </a>
                 </li>                
+
+                <li class="nav-item dropdown">
+                
+                    <% if cliente_signed_in? %>
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= current_cliente.nombre %>
+                        </a><!-- Opción para mostrar el formulario ⏬ -->
+                        <div class="dropdown-menu bg-secondary p-3" style="border: none;">
+                            <%= link_to 'Cerrar sesión', destroy_cliente_session_path, class: 'btn btn-warning', method: :delete, data: { confirm: 'está seguro de cerrar sesión?'} %>
+                        </div>
+
+                    <% else %>                   
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Iniciar sesión
+                        </a><!-- Opción para mostrar el formulario ⏬ -->
+
+                        <div class="dropdown-menu">
+                            <%= form_with(url: cliente_session_path, class: 'p-4') do |formulario| %>
+                                <div class="mb-3">
+                                    <%= formulario.label :correo, class: 'form-label' %>
+                                    <%= formulario.text_field :correo, class: 'form-control', placeholder: 'nombre@ejemplo.com' %>
+                                </div>
+                                <div class="mb-3">
+                                    <%= formulario.label :password, class: 'form-label' %>
+                                    <%= formulario.password_field :password, class: 'form-control' %>
+                                </div>
+
+                                <%= formulario.submit 'Iniciar sesión', class: 'btn btn-primary' %>
+                            <% end %>
+                        </div>
+
+                    <% end %>
+                    
+                </li>
+            
             </ul>
+
+
         </div>
     </div>
 </nav>

@@ -36,10 +36,23 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin">
+                    <a class="nav-link active" aria-current="page" href="/admin/pedidos">
                         <i class="bi bi-reply-all"></i>
                         Pedidos
                     </a>
+                </li>
+
+                <li class="nav-item">
+                    <% if usuario_ha_iniciado_sesion? %>
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= @usuario_actual.nombre %>
+                        </a><!-- Opción para mostrar el formulario ⏬ -->
+                        <div class="dropdown-menu bg-secondary p-3" style="border: none;">
+                            <%= link_to 'Cerrar sesión', cerrar_sesion_path, class: 'btn btn-warning', method: :delete, data: { confirm: 'está seguro de cerrar sesión?'} %>
+                        </div>
+
+                    <% end %>
                 </li>
 
             </ul>

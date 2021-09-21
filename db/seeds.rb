@@ -49,3 +49,17 @@ Region.create([
 #Destino.create(
  #   {nombre: 'Sin destino', region: Region.find_by(nombre: 'Sin region')}
 #)
+
+# Administrador.create([
+#     {nombre:'claudio', correo:'claudio.leiva.r@gmail.com', password: Rails.application.credentials.admin[:password_admin1] },
+#     {nombre:'mardukh', correo:'marduk.claudio@gmail.com', password: Rails.application.credentials.admin[:password_admin2] }
+#     ])
+
+    TipoUsuario.create([
+        { tipo: 'administrador'},
+        { tipo: 'cliente'}
+    ])
+
+    Usuario.create(
+        {email: 'claudio.leiva.r@gmail.com', password: 'xyz789', password_confirmation: 'xyz789', nombre: 'adminX', direccion: 'calle falsa 123', telefono: '000000', tipo_usuario: TipoUsuario.find_by(tipo: 'administrador')}
+    )

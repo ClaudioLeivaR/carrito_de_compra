@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  #devise_for :usuarios
+  devise_for :clientes,  controllers:{
+    confirmations:      'clientes/confirmations',
+    omniauthable: 'clientes/omniauth_callbacks',
+    passwords:          'clientes/passwords',
+    registrations:      'clientes/registrations',
+    sessions:           'clientes/sessions',
+    unlocks:            'clientes/unlocks'
+
+
+  }
+
   #Paginas
   root  'paginas#inicio'
   get   '/carrito', to: 'paginas#carro', ass: 'carrito'
@@ -17,6 +29,10 @@ delete  'carros/:id_producto/cantidad'    , to: 'carros#disminuir_cantidad_produ
   get   'pagar'       , to: 'pedidos#pagar'   , as: 'pagar'
   post  'pedidos'      ,  to: 'pedidos#guardar' ,  as: 'crear_pedido_cliente'
 
+
+  #sesiones admin
+  post '/sesiones',  to: 'sesiones#inicio_sesion',  as: 'inicio_sesion'
+  delete  '/sesiones',  to: 'sesiones#cerrar_sesion',  as: 'cerrar_sesion'
 #admins
 
   namespace :admin do
@@ -59,7 +75,11 @@ delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as
 
 
 #PEDIDOS ADMIN
-    get '/',            to: 'pedidos#listar',   as: 'pedidos'
+
+    
+    
+
+    get '/pedidos',            to: 'pedidos#listar',   as: 'pedidos'
     #get 'pedidos/crear',     to: 'pedidos#crear',    as: 'nuevo_pedido'
     get 'pedidos/:id',       to: 'pedidos#mostrar',   as: 'pedido'
     get 'pedidos/:id/editar', to: 'pedidos#editar',   as: 'editar_pedido'
@@ -77,7 +97,9 @@ delete  'productos/:id/imagenes/:id_imagen' , to: 'productos#eliminar_foto',  as
     delete  'pedidos/:id/producto/:id_producto'           , to: 'pedidos#disminuir_cantidad_producto'   , as: 'disminuir_producto_pedido'
     put     'pedidos/:id/producto/:id_producto'           , to: 'pedidos#aumentar_cantidad_producto'    , as: 'aumentar_producto_pedido'
 
-  
+    
+
+    
   
   end
 

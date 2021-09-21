@@ -17,6 +17,20 @@
     <%= render "layouts/navbar_cliente" %>
 
     <div class="container contenedor">
+    <% if flash[:error_sesion] %>
+
+      <div class="alert alert-danger" role="alert">
+            <%= flash[:error_sesion] %>
+        </div>
+      
+    <% end %>
+    <!--devise flash messages-->
+      <% if flash[:notice] %>
+        <div class="alert alert-danger">
+          <%= flash[:error_sesion] %>
+        </div>
+      <% end %>
+    <!--devise flash messages-->
         <%= yield %>
     </div>
 
